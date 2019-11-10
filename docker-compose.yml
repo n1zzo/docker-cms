@@ -1,0 +1,23 @@
+version: '3'
+services:
+  cms:
+    container_name: izzo_cms
+    build: .
+    ports:
+      - "8888"
+      - "8889"
+      - "8890"
+    volumes:
+      - /home/wdiluigi/docker/cms/cms:/cms
+      - /home/wdiluigi/docker/cms/lib:/var/local/lib/cms
+      - /home/wdiluigi/docker/cms/logs:/var/local/log/cms
+    environment:
+      CMS_CONFIG: "/var/local/lib/cms/config"
+    restart: always
+
+  postgres:
+    container_name: cmd_db
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: "YZoQ2hthxKc2Hcfo6HpA"
