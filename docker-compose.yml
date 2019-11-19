@@ -8,9 +8,9 @@ services:
       - "8889"
       - "8890"
     volumes:
-      - /home/wdiluigi/docker/cms/cms:/cms
-      - /home/wdiluigi/docker/cms/lib:/usr/lib/python3.7/site-packages
-      - /home/wdiluigi/docker/cms/logs:/var/local/log/cms
+      - ./cms/cms:/cms
+      - ./cms/lib:/usr/lib/python3.7/site-packages
+      - ./cms/logs:/var/local/log/cms
     environment:
       CMS_CONFIG: "/cms/config/cms.conf"
     restart: always

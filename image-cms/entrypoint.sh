@@ -32,10 +32,10 @@ if [ "$1" = 'cms' ]; then
     cmsImportContest --import-tasks . || true
 
     # Create "cmsuser" group because apparently CMS needs it
-    addgroup -S cmsuser
+    addgroup -S cmsuser || true
 
     # Create an admin user in the database (admin / admin)
-    cmsAddAdmin admin -p admin
+    cmsAddAdmin admin -p admin || true
 fi
 
 cmsResourceService -a ALL
