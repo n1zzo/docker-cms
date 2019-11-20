@@ -1,18 +1,19 @@
 version: '3'
+
 services:
   cms:
     container_name: izzo_cms
     build: ./image-cms
     ports:
-      - "8888"
-      - "8889"
-      - "8890"
+      - 127.0.0.1:10000:8888
+      - 127.0.0.1:10001:8889
+      - 127.0.0.1:10002:8890
     volumes:
       - ./cms/cms:/cms
       - ./cms/lib:/usr/lib/python3.7/site-packages
       - ./cms/logs:/var/local/log/cms
     environment:
-      CMS_CONFIG: "/cms/config/cms.conf"
+      CMS_CONFIG: /cms/config/cms.conf
     restart: always
 
   postgres:
@@ -20,6 +21,6 @@ services:
     image: postgres
     restart: always
     environment:
-      POSTGRES_DB: "cmsdb"
-      POSTGRES_USER: "cmsuser"
-      POSTGRES_PASSWORD: "your_password_here"
+      POSTGRES_DB: cmsdb
+      POSTGRES_USER: cmsuser
+      POSTGRES_PASSWORD: your_password_here
