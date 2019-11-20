@@ -18,9 +18,13 @@ if [ "$1" = 'cms' ]; then
     python3 setup.py build
     python3 setup.py install
 
-    # Use default config
-    cp config/cms.conf.sample config/cms.conf
-    sed -i 's/localhost:5432/cms_db:5432/' config/cms.conf
+    # Use default config, if not already present
+    if [ ! -f config/cms.conf ]; then
+        cp config/cms.conf.sample config/cms.conf
+        sed -i 's/localhost:5432/cms_db:5432/' config/cms.conf
+        # Do not use the default secret
+        sed -i "s/8e045a51e4b102ea803c06f92841a1fb/$(tr -dc 'a-f0-9' < /dev/urandom | head -c32)/" config/cms.conf
+    fi
 
     # Initialize schema (create tables), if necessary
     cmsInitDB 2>&1 >/dev/null || true
